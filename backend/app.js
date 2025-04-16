@@ -8,14 +8,38 @@ const product= require('./controller/product')
 const path=require('path')
 const orders = require('./controller/orders');
 
+// const corsOptions = {
+//     origin: 'http://localhost:5173', // Allow only your frontend origin
+//     credentials: true, // Allow cookies and credentials
+//   };
+
+
+// const allowedOrigins = ['https://transcendent-clafoutis-c78124.netlify.app'];
+
+// app.use(cors({
+//   origin: allowedOrigins,
+//   credentials: true,
+// }));
+// app.use(cors(corsOptions));
+
+
+const allowedOrigins = ['https://transcendent-clafoutis-c78124.netlify.app'];
+
 const corsOptions = {
-    origin: 'http://localhost:5173', // Allow only your frontend origin
-    credentials: true, // Allow cookies and credentials
-  };
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors(corsOptions));
 app.use("/",express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
