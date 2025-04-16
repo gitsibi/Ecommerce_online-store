@@ -19,7 +19,8 @@ const allowedOrigins = [
   'https://transcendent-clafoutis-c78124.netlify.app', // Production site 1
   'https://glowing-ganache-83cc2c.netlify.app', // Production site 2 (add this origin)
   'https://calm-treacle-f81b77.netlify.app', // newly added
-   'https://nimble-sfogliatella-270dc3.netlify.app'
+   'https://nimble-sfogliatella-270dc3.netlify.app',
+   'https://ecommerce-sibishree.netlify.app'
 
 ];
 const corsOptions = {
