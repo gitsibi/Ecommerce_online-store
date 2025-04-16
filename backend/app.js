@@ -22,7 +22,6 @@ const allowedOrigins = [
    'https://nimble-sfogliatella-270dc3.netlify.app'
 
 ];
-
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
