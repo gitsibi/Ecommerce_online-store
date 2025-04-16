@@ -15,24 +15,28 @@ const orders = require('./controller/orders');
 
 
 const allowedOrigins = [
-    'http://localhost:5173',
-    'https://transcendent-clafoutis-c78124.netlify.app'
-  ];
-  
-  const corsOptions = {
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl, etc.)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  };
+  'http://localhost:5173', // Local development
+  'https://transcendent-clafoutis-c78124.netlify.app', // Production site 1
+  'https://glowing-ganache-83cc2c.netlify.app' // Production site 2 (add this origin)
+];
 
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('CORS policy: The origin is not allowed'), false); // Reject the request
+    }
+  },
+  credentials: true, // Allow cookies/credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+};
 
 app.use(cors(corsOptions));
+
+
+
+// app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());

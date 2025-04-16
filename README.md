@@ -447,4 +447,7 @@ Deploy both the frontend and backend to make the project live.
 - Deploy the frontend using a hosting service.  
 - Ensure both frontend and backend are working properly.  
 
+#### RENDER:
+- https://ecommerce-online-store-2.onrender.com
+
 This milestone completes the project with a fully deployed and functional website. 🚀
