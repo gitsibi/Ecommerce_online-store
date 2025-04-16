@@ -14,27 +14,23 @@ const orders = require('./controller/orders');
 //   };
 
 
-// const allowedOrigins = ['https://transcendent-clafoutis-c78124.netlify.app'];
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://transcendent-clafoutis-c78124.netlify.app'
+  ];
+  
+  const corsOptions = {
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, curl, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  };
 
-// app.use(cors({
-//   origin: allowedOrigins,
-//   credentials: true,
-// }));
-// app.use(cors(corsOptions));
-
-
-const allowedOrigins = ['https://transcendent-clafoutis-c78124.netlify.app'];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
 
 app.use(cors(corsOptions));
 
