@@ -20,7 +20,8 @@ const allowedOrigins = [
   'https://glowing-ganache-83cc2c.netlify.app', // Production site 2 (add this origin)
   'https://calm-treacle-f81b77.netlify.app', // newly added
    'https://nimble-sfogliatella-270dc3.netlify.app',
-   'https://ecommerce-sibishree.netlify.app'
+   'https://ecommerce-sibishree.netlify.app',
+   'https://ecommerce-online-frontend.onrender.com'
 
 ];
 const corsOptions = {
