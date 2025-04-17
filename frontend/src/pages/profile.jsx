@@ -31,7 +31,7 @@ export default function Profile() {
 		// 		return res.json();
 		// 	})
 		axios
- 			.get("http://localhost:8000/api/v2/user/profile", { params: { email } })
+ 			.get("/api/v2/user/profile", { params: { email } })
 			.then((res) => {
 				setPersonalDetails(res.data.user);
 				setAddresses(res.data.addresses);

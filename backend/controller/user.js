@@ -84,10 +84,12 @@ router.post(
   });
 
   user.password = undefined; // Remove password from response
-    res.status(200).json({
-        success: true,
-        user,
-    });
+  res.status(200).json({
+    success: true,
+    token, 
+    user,
+  });
+  
 }));
 
 router.get("/profile", isAuthenticatedUser, catchAsyncErrors(async (req, res, next) => {
