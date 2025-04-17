@@ -16,7 +16,7 @@ const orders = require('./controller/orders');
 
 const allowedOrigins = [
   'http://localhost:5173', // Local development
-   'https://ecommerce-online-frontend.onrender.com'
+   'https://ecommerce-online-store-frontend.onrender.com'
 
 ];
 const corsOptions = {
