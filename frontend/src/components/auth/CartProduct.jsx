@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { IoIosAdd } from "react-icons/io";
 import { IoIosRemove } from "react-icons/io";
-
+import axios from '../../axiosConfig';
+import { useSelector } from "react-redux";
 export default function CartProduct({ _id, name, images, quantity, price }) {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [quantityVal, setQuantityVal] = useState(quantity);
+
+	const email = useSelector((state) => state.user.email);
+
 
 	useEffect(() => {
 		if (!images || images.length === 0) return;
@@ -26,31 +30,45 @@ export default function CartProduct({ _id, name, images, quantity, price }) {
 		updateQuantityVal(newquantityVal);
 	};
 
-	const updateQuantityVal = (quantity) => {
-		fetch('http://localhost:8000/api/v2/product/cartproduct/quantity', {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email: 'samragyisharma.2226@gmail.com',
-				productId: _id,
-				quantity,
-			}),
-		})
-			.then((res) => {
-				if (!res.ok) {
-					throw new Error(`HTTP error! status: ${res.status}`);
-				}
-				return res.json();
-			})
-			.then((data) => {
-				console.log('quantityVal updated:', data);
-			})
-			.catch((err) => {
-				console.error('Error updating quantityVal:', err);
-			});
-	};
+	
+	const updateQuantityVal = async (quantity) => {
+		try {
+		  const res = await axios.put("/api/v2/product/cartproduct/quantity", {
+			email, 
+			productId: _id,
+			quantity,
+		  });
+		  console.log("Quantity updated:", res.data);
+		} catch (err) {
+		  console.error("Error updating quantity:", err);
+		}
+	  };
+
+	// const updateQuantityVal = (quantity) => {
+	// 	fetch('http://localhost:8000/api/v2/product/cartproduct/quantity', {
+	// 		method: 'PUT',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({
+	// 			email: 'sibi123@gmail.com',
+	// 			productId: _id,
+	// 			quantity,
+	// 		}),
+	// 	})
+	// 		.then((res) => {
+	// 			if (!res.ok) {
+	// 				throw new Error(`HTTP error! status: ${res.status}`);
+	// 			}
+	// 			return res.json();
+	// 		})
+	// 		.then((data) => {
+	// 			console.log('quantityVal updated:', data);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error('Error updating quantityVal:', err);
+	// 		});
+	// };
 
 	const currentImage = images && images.length > 0 ? images[currentIndex] : "";
 	return (

@@ -14,43 +14,43 @@ const orders = require('./controller/orders');
 //   };
 
 
-// const allowedOrigins = [
-//   'http://localhost:5173', // Local development
-//    'https://ecommerce-online-frontend.onrender.com'
+const allowedOrigins = [
+  'http://localhost:5173', // Local development
+   'https://ecommerce-online-frontend.onrender.com'
 
-// ];
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true); // Allow the request
-//     } else {
-//       callback(new Error('CORS policy: The origin is not allowed'), false); // Reject the request
-//     }
-//   },
-//   credentials: true, // Allow cookies/credentials
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
-// };
-
-// app.use(cors(corsOptions));
-
-
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(',')
-  : [];
-
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
+      callback(null, true); // Allow the request
     } else {
-      callback(new Error('CORS policy: The origin is not allowed'), false);
+      callback(new Error('CORS policy: The origin is not allowed'), false); // Reject the request
     }
   },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Allow cookies/credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
 };
 
 app.use(cors(corsOptions));
+
+
+// const allowedOrigins = process.env.ALLOWED_ORIGINS
+//   ? process.env.ALLOWED_ORIGINS.split(',')
+//   : [];
+
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('CORS policy: The origin is not allowed'), false);
+//     }
+//   },
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+// };
+
+// app.use(cors(corsOptions));
 
 
 

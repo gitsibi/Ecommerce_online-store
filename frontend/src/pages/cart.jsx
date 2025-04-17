@@ -8,7 +8,7 @@ import axios from '../axiosConfig';
 const Cart = () => {
 
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate(); 
 
   // Get the email from Redux state
   const email = useSelector((state) => state.user.email);
@@ -33,7 +33,7 @@ const Cart = () => {
   }, [email]);
 
       const handlePlaceOrder = () => {
-        navigate('/select-address'); // Navigate to the Select Address page
+        navigate('/select-address');
       };
 
       return (
