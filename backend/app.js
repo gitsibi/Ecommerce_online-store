@@ -14,33 +14,46 @@ const orders = require('./controller/orders');
 //   };
 
 
-const allowedOrigins = [
-  'http://localhost:5173', // Local development
-  'https://transcendent-clafoutis-c78124.netlify.app', // Production site 1
-  'https://glowing-ganache-83cc2c.netlify.app', // Production site 2 (add this origin)
-  'https://calm-treacle-f81b77.netlify.app', // newly added
-   'https://nimble-sfogliatella-270dc3.netlify.app',
-   'https://ecommerce-sibishree.netlify.app',
-   'https://ecommerce-online-frontend.onrender.com'
+// const allowedOrigins = [
+//   'http://localhost:5173', // Local development
+//    'https://ecommerce-online-frontend.onrender.com'
 
-];
+// ];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true); // Allow the request
+//     } else {
+//       callback(new Error('CORS policy: The origin is not allowed'), false); // Reject the request
+//     }
+//   },
+//   credentials: true, // Allow cookies/credentials
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+// };
+
+// app.use(cors(corsOptions));
+
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : [];
+
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Allow the request
+      callback(null, true);
     } else {
-      callback(new Error('CORS policy: The origin is not allowed'), false); // Reject the request
+      callback(new Error('CORS policy: The origin is not allowed'), false);
     }
   },
-  credentials: true, // Allow cookies/credentials
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
 
 app.use(cors(corsOptions));
 
 
 
-// app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
