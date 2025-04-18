@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import AddressCard from "../components/auth/AddressCard";
 import NavBar from "../components/auth/nav";
 import { useSelector } from "react-redux"; 
-// import axios from "../axiosConfig";
-import axios from 'axios';
+import axios from "../axiosConfig";
+// import axios from 'axios';
 // axios.defaults.withCredentials = true;
 
 export default function Profile() {
