@@ -78,8 +78,10 @@ router.post(
   // Set token in an HttpOnly cookie
   res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // use true in production
-      sameSite: "Strict",
+      // secure: process.env.NODE_ENV === "production", // use true in production
+      // sameSite: "Strict",
+      secure: true, // Must be true for cross-site cookies
+      sameSite: "None", // Important for cross-site cookies
       maxAge: 3600000, // 1 hour
   });
 
