@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import AddressCard from "../components/auth/AddressCard";
 import NavBar from "../components/auth/nav";
 import { useSelector } from "react-redux"; 
-import axios from "../axiosConfig";
+// import axios from "../axiosConfig";
+import axios from 'axios';
+// axios.defaults.withCredentials = true;
 
 export default function Profile() {
 	const email = useSelector((state) => state.user.email);
+	console.log(email);
 	const [personalDetails, setPersonalDetails] = useState({
 		name: "",
 		email: "",
@@ -19,10 +22,12 @@ export default function Profile() {
 		// Only fetch profile if email exists
 		if (!email) return;
 		// fetch(
-		// 	`http://localhost:8000/api/v2/user/profile?email=${"sibishree.m@kalvium.community"}`,
+		// 	`http://localhost:8000/api/v2/user/profile?email=${email}`,
 		// 	{
 		// 		method: "GET",
-		// 	}
+		// 		credentials: "include",
+		// 	},
+            
 		// )
 		// 	.then((res) => {
 		// 		if (!res.ok) {
@@ -30,8 +35,12 @@ export default function Profile() {
 		// 		}
 		// 		return res.json();
 		// 	})
-		axios
- 			.get("/api/v2/user/profile", { params: { email } })
+		// axios.get(`http://localhost:8000/api/v2/user/profile?email=${email}`, { withCredentials: true })
+		// axios.get("/api/v2/user/profile", { params: { email } })
+		axios.get("/api/v2/user/profile", {
+			params: { email },
+			withCredentials: true, 
+		  })
 			.then((res) => {
 				setPersonalDetails(res.data.user);
 				setAddresses(res.data.addresses);

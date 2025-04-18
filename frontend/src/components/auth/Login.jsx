@@ -1,38 +1,71 @@
+// import React, { useState } from "react";
+// import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+// import styles from "../../styles/styles";
+// import axios from "../../axiosConfig";
+// // import axios from 'axios'
+// import { useDispatch, useSelector } from "react-redux"; 
+// import { setemail } from "../../store/userActions";
+// import { useNavigate } from "react-router-dom"; 
+
+// // Ensure axios sends cookies with requests
+// axios.defaults.withCredentials = true;
+
+// const Login = () => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate(); 
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [visible, setVisible] = useState(false);
+
+//   const user = useSelector((state) => state.user);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await axios.post("/api/v2/user/login", { email, password }, {withCredentials: true,});
+//       console.log(response.data);
+//       alert("Logged in successfully!");
+//       // Dispatch email to Redux state (token is now handled via cookies)
+//       dispatch(setemail(email));
+//       // Redirect to home or profile page after successful login
+//       navigate("/");
+//     } catch (error) {
+//       console.error("There was an error logging in!", error);
+//     }
+//   };
+
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
-import axios from "../../axiosConfig"; // ✅ updated axios import
-import { useDispatch, useSelector } from "react-redux"; // ✅ added useSelector
+import axios from "../../axiosConfig";
+import { useDispatch, useSelector } from "react-redux";
 import { setemail } from "../../store/userActions";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 
-// Ensure axios sends cookies with requests
 axios.defaults.withCredentials = true;
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.email);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/v2/user/login", { email, password }, {withCredentials: true,});
+      const response = await axios.post("/api/v2/user/login", { email, password },{withCredentials: true,});
       console.log(response.data);
       alert("Logged in successfully!");
-      // Dispatch email to Redux state (token is now handled via cookies)
       dispatch(setemail(email));
-      // Redirect to home or profile page after successful login
       navigate("/");
     } catch (error) {
       console.error("There was an error logging in!", error);
+      alert("Login failed!");
     }
   };
-
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
